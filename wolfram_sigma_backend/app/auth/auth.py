@@ -9,7 +9,7 @@ from wolfram_sigma_backend.app.auth.manager import get_user_manager
 from wolfram_sigma_backend.app.auth.models import User, Role
 from config import SECRET as SECRET_AUTH
 
-cookie_transport = CookieTransport(cookie_name="bonds", cookie_max_age=3600)
+cookie_transport = CookieTransport(cookie_name="users", cookie_max_age=3600)
 
 
 def get_jwt_strategy() -> JWTStrategy:

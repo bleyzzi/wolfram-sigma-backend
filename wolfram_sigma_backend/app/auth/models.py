@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import Column, Integer, TIMESTAMP, String, Boolean, ForeignKey
+from sqlalchemy import Integer, TIMESTAMP, String, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 from wolfram_sigma_backend.app.database.database import Base
@@ -22,8 +22,8 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str]
     username: Mapped[str]
-    registered_at: Mapped[Optional[TIMESTAMP]] = mapped_column(default=datetime.utcnow)
-    role_id: Mapped[int] = mapped_column(Integer, ForeignKey("role.c.id"))
+    registered_at: Mapped[Optional[datetime]] = mapped_column(default=datetime.utcnow)
+    role_id: Mapped[int] = mapped_column(Integer, ForeignKey("role.id"))
     hashed_password: Mapped[str] = mapped_column(String(length=1024), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)

@@ -1,8 +1,10 @@
+import uuid
+
 from datetime import datetime
 from typing import Optional
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import Integer, TIMESTAMP, String, Boolean, ForeignKey
+from sqlalchemy import Integer, String, Boolean, ForeignKey, types
 from sqlalchemy.orm import Mapped, mapped_column
 
 from wolfram_sigma_backend.app.database.database import Base
@@ -19,7 +21,7 @@ class Role(Base):
 class User(SQLAlchemyBaseUserTable[int], Base):
     __tablename__ = "user"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[uuid.UUID] = mapped_column(types.Uuid, primary_key=True, default=uuid.uuid4)
     email: Mapped[str]
     username: Mapped[str]
     registered_at: Mapped[Optional[datetime]] = mapped_column(default=datetime.utcnow)

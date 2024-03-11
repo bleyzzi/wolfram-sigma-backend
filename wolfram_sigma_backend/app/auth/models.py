@@ -21,7 +21,9 @@ class Role(Base):
 class User(SQLAlchemyBaseUserTable[int], Base):
     __tablename__ = "user"
 
-    id: Mapped[uuid.UUID] = mapped_column(types.Uuid, primary_key=True, default=uuid.uuid4)
+    id: Mapped[uuid.UUID] = mapped_column(
+        types.Uuid, primary_key=True, default=uuid.uuid4
+    )
     email: Mapped[str]
     username: Mapped[str]
     registered_at: Mapped[Optional[datetime]] = mapped_column(default=datetime.utcnow)

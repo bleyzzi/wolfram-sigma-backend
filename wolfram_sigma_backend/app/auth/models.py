@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
-from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
+from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from sqlalchemy import Integer, String, Boolean, ForeignKey, types
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -18,7 +18,7 @@ class Role(Base):
     permission: Mapped[Optional[str]]
 
 
-class User(SQLAlchemyBaseUserTable[int], Base):
+class User(SQLAlchemyBaseUserTableUUID, Base):
     __tablename__ = "user"
 
     id: Mapped[uuid.UUID] = mapped_column(

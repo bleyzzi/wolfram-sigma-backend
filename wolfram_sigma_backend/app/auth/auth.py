@@ -1,15 +1,18 @@
+import uuid
+
 from fastapi_users import FastAPIUsers
 from fastapi_users.authentication import (
     AuthenticationBackend,
-    CookieTransport,
+    BearerTransport,
     JWTStrategy,
+    CookieTransport
 )
 
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
-from wolfram_sigma_backend.app.auth.models import User, Role
+from wolfram_sigma_backend.app.auth.models import User
 from config import SECRET as SECRET_AUTH
 
-cookie_transport = CookieTransport(cookie_name="user", cookie_max_age=3600)
+cookie_transport = CookieTransport(cookie_name='user', cookie_max_age=3600)
 
 
 def get_jwt_strategy() -> JWTStrategy:
@@ -22,7 +25,7 @@ auth_backend = AuthenticationBackend(
     get_strategy=get_jwt_strategy,
 )
 
-fastapi_users = FastAPIUsers[User, int](
+fastapi_users = FastAPIUsers[User, uuid.UUID](
     get_user_manager,
     [auth_backend],
 )

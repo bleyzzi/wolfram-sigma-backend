@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi_users import FastAPIUsers
 
-from wolfram_sigma_backend.app.auth.auth import auth_backend
+from wolfram_sigma_backend.app.auth.auth import auth_backend, current_user
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
 from wolfram_sigma_backend.app.auth.models import User
 from wolfram_sigma_backend.app.auth.schemas import UserRead, UserCreate
@@ -24,8 +24,6 @@ app.include_router(
     prefix="/auth",
     tags=["auth"],
 )
-
-current_user = fastapi_users.current_user()
 
 
 @app.get("/protected-route")

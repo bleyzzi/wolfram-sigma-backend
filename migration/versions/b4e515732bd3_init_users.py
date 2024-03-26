@@ -1,7 +1,7 @@
 """init users
 
 Revision ID: b4e515732bd3
-Revises: 
+Revises:
 Create Date: 2024-03-10 14:48:29.412917
 
 """

@@ -1,14 +1,20 @@
+import uuid
 from typing import Optional
 
-from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
+from fastapi import Depends
+from fastapi import Request
+from fastapi_users import BaseUserManager
+from fastapi_users import exceptions
+from fastapi_users import models
+from fastapi_users import schemas
+from fastapi_users import UUIDIDMixin
 
 from config import SECRET as SECRET_AUTH
 from wolfram_sigma_backend.app.auth.database import get_user_db
 from wolfram_sigma_backend.app.auth.models import User
 
 
-class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
+class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     reset_password_token_secret = SECRET_AUTH
     verification_token_secret = SECRET_AUTH
 

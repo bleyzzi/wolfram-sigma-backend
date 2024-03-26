@@ -1,11 +1,15 @@
 import uuid
-
 from datetime import datetime
 from typing import Optional
 
-from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import Integer, String, Boolean, ForeignKey, types
-from sqlalchemy.orm import Mapped, mapped_column
+from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
+from sqlalchemy import Boolean
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import types
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
 
 from wolfram_sigma_backend.app.database.database import Base
 
@@ -18,7 +22,7 @@ class Role(Base):
     permission: Mapped[Optional[str]]
 
 
-class User(SQLAlchemyBaseUserTable[int], Base):
+class User(SQLAlchemyBaseUserTableUUID, Base):
     __tablename__ = "user"
 
     id: Mapped[uuid.UUID] = mapped_column(

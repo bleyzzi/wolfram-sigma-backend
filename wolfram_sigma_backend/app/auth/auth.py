@@ -1,15 +1,13 @@
 import uuid
 
 from fastapi_users import FastAPIUsers
-from fastapi_users.authentication import (
-    AuthenticationBackend,
-    JWTStrategy,
-    CookieTransport,
-)
+from fastapi_users.authentication import AuthenticationBackend
+from fastapi_users.authentication import CookieTransport
+from fastapi_users.authentication import JWTStrategy
 
+from config import SECRET as SECRET_AUTH
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
 from wolfram_sigma_backend.app.auth.models import User
-from config import SECRET as SECRET_AUTH
 
 cookie_transport = CookieTransport(cookie_name="user", cookie_max_age=3600)
 

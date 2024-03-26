@@ -1,10 +1,13 @@
-from fastapi import FastAPI, Depends
+from fastapi import Depends
+from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
 
-from wolfram_sigma_backend.app.auth.auth import auth_backend, current_user
+from wolfram_sigma_backend.app.auth.auth import auth_backend
+from wolfram_sigma_backend.app.auth.auth import current_user
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
 from wolfram_sigma_backend.app.auth.models import User
-from wolfram_sigma_backend.app.auth.schemas import UserRead, UserCreate
+from wolfram_sigma_backend.app.auth.schemas import UserCreate
+from wolfram_sigma_backend.app.auth.schemas import UserRead
 
 app = FastAPI()
 

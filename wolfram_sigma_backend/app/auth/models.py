@@ -1,11 +1,15 @@
 import uuid
-
 from datetime import datetime
 from typing import Optional
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
-from sqlalchemy import Integer, String, Boolean, ForeignKey, types
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Boolean
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import types
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
 
 from wolfram_sigma_backend.app.database.database import Base
 

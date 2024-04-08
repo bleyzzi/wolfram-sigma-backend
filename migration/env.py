@@ -1,14 +1,9 @@
 from logging.config import fileConfig
 
 from alembic import context
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import engine_from_config, pool
 
-from config import DB_HOST
-from config import DB_NAME
-from config import DB_PASS
-from config import DB_PORT
-from config import DB_USER
+from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 from wolfram_sigma_backend.app.auth.models import Base
 
 # this is the Alembic Config object, which provides

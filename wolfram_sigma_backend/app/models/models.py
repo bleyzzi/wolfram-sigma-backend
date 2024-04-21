@@ -6,7 +6,7 @@ from typing import Optional
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
-from wolfram_sigma_backend.app.database.database import Base
+from wolfram_sigma_backend.app.auth.models import Base
 
 
 class Params(Base):
@@ -30,5 +30,5 @@ class Equation(Base):
 class Equation_User(Base):
     __tablename__ = "equation_user"
 
-    user_id: Mapped[int] =  mapped_column(Integer, ForeignKey("user.id"))
-    equation_id: Mapped[int] = mapped_column(Integer, ForeignKey("equation.id"))
+    user_id: Mapped[int] =  mapped_column(Integer, ForeignKey("user.id"), primary_key=True)
+    equation_id: Mapped[int] = mapped_column(Integer, ForeignKey("equation.id"), primary_key=True)

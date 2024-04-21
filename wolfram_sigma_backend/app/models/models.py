@@ -3,8 +3,7 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
-from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import Integer, String, Boolean, ForeignKey, types
+from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 from wolfram_sigma_backend.app.database.database import Base
@@ -24,7 +23,7 @@ class Equation(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     expression: Mapped[str] = mapped_column(String, nullable=False)
     result: Mapped[str] = mapped_column(String, nullable=False)
-    params: Mapped[int] = mapped_column(Integer, ForeignKey("params.id"))
+    params_id: Mapped[int] = mapped_column(Integer, ForeignKey("params.id"))
     created_at: Mapped[Optional[datetime]] = mapped_column(default=datetime.utcnow)
 
 

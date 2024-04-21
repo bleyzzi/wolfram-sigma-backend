@@ -3,6 +3,7 @@ from fastapi_users import FastAPIUsers
 
 from wolfram_sigma_backend.app.auth.auth import auth_backend
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
+from wolfram_sigma_backend.app.mainpage import get_mainpage_router
 from wolfram_sigma_backend.app.auth.models import User
 from wolfram_sigma_backend.app.auth.schemas import UserRead, UserCreate
 
@@ -23,6 +24,12 @@ app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
     prefix="/auth",
     tags=["auth"],
+)
+
+app.include_router(
+    get_mainpage_router(),
+    prefix="/mainpage",  # Пустой префикс, так как URL уже указан в роутере
+    tags=["mainpage"]
 )
 
 current_user = fastapi_users.current_user()

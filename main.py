@@ -1,13 +1,11 @@
-from fastapi import Depends
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi_users import FastAPIUsers
 
-from wolfram_sigma_backend.app.auth.auth import auth_backend
+from wolfram_sigma_backend.app.auth.auth import auth_backend, current_user
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
 from wolfram_sigma_backend.app.auth.models import User
-from wolfram_sigma_backend.app.auth.schemas import UserCreate
-from wolfram_sigma_backend.app.auth.schemas import UserRead
-from wolfram_sigma_backend.app.mainpage.router import router as mainpage_router
+from wolfram_sigma_backend.app.auth.schemas import UserCreate, UserRead
 
 app = FastAPI()
 
@@ -28,9 +26,23 @@ app.include_router(
     tags=["auth"],
 )
 
-app.include_router(mainpage_router, prefix="/mainpage", tags=["mainpage"])
+origins = [
+    "http://localhost:8000"
+]
 
-current_user = fastapi_users.current_user()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=[
+        "Access-Control-Allow-Headers",
+        "Content-Type",
+        "Authorization",
+        "Access-Control-Allow-Origin",
+        "Set-Cookie",
+    ],
+)
 
 
 @app.get("/protected-route")

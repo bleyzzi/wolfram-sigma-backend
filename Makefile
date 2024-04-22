@@ -6,6 +6,3 @@ down:
 
 run:
 	uvicorn main:app --reload
-
-migrate:
-	alembic revision --autogenerate

@@ -1,10 +1,11 @@
-import uuid
-
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import Integer, String, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
 
 from wolfram_sigma_backend.app.auth.models import Base
 
@@ -30,5 +31,9 @@ class Equation(Base):
 class Equation_User(Base):
     __tablename__ = "equation_user"
 
-    user_id: Mapped[int] =  mapped_column(Integer, ForeignKey("user.id"), primary_key=True)
-    equation_id: Mapped[int] = mapped_column(Integer, ForeignKey("equation.id"), primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("user.id"), primary_key=True
+    )
+    equation_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("equation.id"), primary_key=True
+    )

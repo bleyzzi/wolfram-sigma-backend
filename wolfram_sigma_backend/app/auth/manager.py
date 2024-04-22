@@ -1,7 +1,12 @@
 from typing import Optional
 
-from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
+from fastapi import Depends
+from fastapi import Request
+from fastapi_users import BaseUserManager
+from fastapi_users import exceptions
+from fastapi_users import IntegerIDMixin
+from fastapi_users import models
+from fastapi_users import schemas
 
 from config import SECRET as SECRET_AUTH
 from wolfram_sigma_backend.app.auth.database import get_user_db

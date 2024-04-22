@@ -1,11 +1,15 @@
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from alembic import context
+from config import DB_HOST
+from config import DB_NAME
+from config import DB_PASS
+from config import DB_PORT
+from config import DB_USER
 from wolfram_sigma_backend.app.models.models import Base
-from config import DB_HOST, DB_USER, DB_NAME, DB_PORT, DB_PASS
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

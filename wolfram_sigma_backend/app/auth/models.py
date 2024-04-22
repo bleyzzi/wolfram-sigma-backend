@@ -5,7 +5,7 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from sqlalchemy import Boolean, ForeignKey, Integer, String, types
 from sqlalchemy.orm import Mapped, mapped_column
 
-from wolfram_sigma_backend.app.database.database import Base
+from wolfram_sigma_backend.app.persistence.database_config import Base
 
 
 class Role(Base):

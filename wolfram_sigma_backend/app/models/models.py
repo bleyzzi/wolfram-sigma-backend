@@ -28,7 +28,7 @@ class Equation(Base):
     created_at: Mapped[Optional[datetime]] = mapped_column(default=datetime.utcnow)
 
 
-class Equation_User(Base):
+class EquationUser(Base):
     __tablename__ = "equation_user"
 
     user_id: Mapped[int] = mapped_column(

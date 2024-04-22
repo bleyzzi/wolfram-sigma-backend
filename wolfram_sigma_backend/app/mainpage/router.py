@@ -1,7 +1,8 @@
-from typing import Dict, Any
+from typing import Any
+from typing import Dict
 
-from fastapi import HTTPException
 from fastapi import APIRouter
+from fastapi import HTTPException
 
 from wolfram_sigma_backend.app.mainpage.schemas import EquationData
 
@@ -14,4 +15,6 @@ async def evaluate_expression(data: EquationData) -> Dict[str, Any]:
         result = eval(data.equation.format(*data.args))
         return {"result": result}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error evaluating equation: {str(e)}")
+        raise HTTPException(
+            status_code=400, detail=f"Error evaluating equation: {str(e)}"
+        )

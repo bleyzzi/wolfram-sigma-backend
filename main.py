@@ -1,18 +1,11 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi_users import FastAPIUsers
 
-from wolfram_sigma_backend.app.auth.auth import auth_backend, current_user
-from wolfram_sigma_backend.app.auth.manager import get_user_manager
-from wolfram_sigma_backend.app.auth.models import User
+from wolfram_sigma_backend.app.auth.auth import auth_backend, fastapi_users
 from wolfram_sigma_backend.app.auth.schemas import UserCreate, UserRead
+from wolfram_sigma_backend.app.web_api.routers import routers
 
 app = FastAPI()
-
-fastapi_users = FastAPIUsers[User, int](
-    get_user_manager,
-    [auth_backend],
-)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),
@@ -26,9 +19,11 @@ app.include_router(
     tags=["auth"],
 )
 
-origins = [
-    "http://localhost:8000"
-]
+for router in routers:
+    app.include_router(router)
+
+
+origins = ["http://localhost:8000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,8 +38,3 @@ app.add_middleware(
         "Set-Cookie",
     ],
 )
-
-
-@app.get("/protected-route")
-def protected_route(user: User = Depends(current_user)):
-    return f"Hello, {user.username}"

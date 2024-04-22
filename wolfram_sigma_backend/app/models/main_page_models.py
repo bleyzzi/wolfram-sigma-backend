@@ -1,13 +1,10 @@
+import uuid
 from datetime import datetime
-from typing import Optional
 
-from sqlalchemy import ForeignKey
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+from sqlalchemy import ForeignKey, Integer, String, types
+from sqlalchemy.orm import Mapped, mapped_column
 
-from wolfram_sigma_backend.app.auth.models import Base
+from wolfram_sigma_backend.app.persistence.database_config import Base
 
 
 class Params(Base):
@@ -25,15 +22,11 @@ class Equation(Base):
     expression: Mapped[str] = mapped_column(String, nullable=False)
     result: Mapped[str] = mapped_column(String, nullable=False)
     params_id: Mapped[int] = mapped_column(Integer, ForeignKey("params.id"))
-    created_at: Mapped[Optional[datetime]] = mapped_column(default=datetime.utcnow)
+    created_at: Mapped[datetime | None] = mapped_column(default=datetime.utcnow)
 
 
 class EquationUser(Base):
     __tablename__ = "equation_user"
 
-    user_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("user.id"), primary_key=True
-    )
-    equation_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("equation.id"), primary_key=True
-    )
+    user_id: Mapped[uuid.UUID] = mapped_column(types.Uuid, ForeignKey("user.id"), primary_key=True)
+    equation_id: Mapped[int] = mapped_column(Integer, ForeignKey("equation.id"), primary_key=True)

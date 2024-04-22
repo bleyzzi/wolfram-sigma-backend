@@ -2,10 +2,12 @@ import uuid
 
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, UUIDIDMixin, exceptions, models, schemas
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from config import SECRET as SECRET_AUTH
-from wolfram_sigma_backend.app.auth.database import get_user_db
 from wolfram_sigma_backend.app.auth.models import User
+from wolfram_sigma_backend.app.persistence.database_config import get_async_session
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
@@ -37,6 +39,10 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         await self.on_after_register(created_user, request)
 
         return created_user
+
+
+async def get_user_db(session: AsyncSession = Depends(get_async_session)):
+    yield SQLAlchemyUserDatabase(session, User)
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):

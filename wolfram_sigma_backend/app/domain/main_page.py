@@ -3,6 +3,6 @@ from typing import List
 from pydantic import BaseModel
 
 
-class EquationData(BaseModel):
+class EquationSchema(BaseModel):
     equation: str
     args: List[float]

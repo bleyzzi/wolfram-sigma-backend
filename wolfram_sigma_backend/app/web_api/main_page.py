@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 
 from wolfram_sigma_backend.app.domain.main_page import EquationSchema
 
-main_page_router = APIRouter()
+main_page_router = APIRouter(tags=["main-page"])
 
 
 @main_page_router.post("/post_equation")

@@ -6,7 +6,7 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config import SECRET as SECRET_AUTH
-from wolfram_sigma_backend.app.auth.models import User
+from wolfram_sigma_backend.app.models.auth_models import User
 from wolfram_sigma_backend.app.persistence.database_config import get_async_session
 
 

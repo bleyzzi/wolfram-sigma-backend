@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from wolfram_sigma_backend.app.auth.auth import auth_backend, fastapi_users
-from wolfram_sigma_backend.app.auth.schemas import UserCreate, UserRead
+from wolfram_sigma_backend.app.domain.auth import UserCreate, UserRead
 from wolfram_sigma_backend.app.web_api.routers import routers
 
 app = FastAPI()

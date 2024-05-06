@@ -19,6 +19,13 @@ app.include_router(
     tags=["auth"],
 )
 
+
+app.include_router(
+    fastapi_users.get_reset_password_router(),
+    prefix="/auth/jwt",
+    tags=["auth"],
+)
+
 for router in routers:
     app.include_router(router)
 

@@ -1,8 +1,10 @@
 import uuid
+from typing import Optional
 
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, UUIDIDMixin, exceptions, models, schemas
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
+from fastapi_users.jwt import generate_jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config import SECRET as SECRET_AUTH
@@ -14,8 +16,32 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     reset_password_token_secret = SECRET_AUTH
     verification_token_secret = SECRET_AUTH
 
+    async def on_after_forgot_password(
+            self, user: User, token: str, request: Optional[Request] = None
+    ):
+        print(f"User {user.id} has forgot their password")
+
     async def on_after_register(self, user: User, request: Request | None = None):
         print(f"User {user.id} has registered.")
+
+    async def forgot_password(
+        self, user: models.UP, request: Optional[Request] = None
+    ) -> str:
+        if not user.is_active:
+            raise exceptions.UserInactive()
+
+        token_data = {
+            "sub": str(user.id),
+            "password_fgpt": self.password_helper.hash(user.hashed_password),
+            "aud": self.reset_password_token_audience,
+        }
+        token = generate_jwt(
+            token_data,
+            self.reset_password_token_secret,
+            self.reset_password_token_lifetime_seconds,
+        )
+        await self.on_after_forgot_password(user, token, request)
+        return token
 
     async def create(
         self,

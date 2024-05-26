@@ -35,7 +35,7 @@ def upgrade() -> None:
     )
     op.create_table(
         "equation",
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False, autoincrement=True),
         sa.Column("expression", sa.String(), nullable=False),
         sa.Column("result", sa.String(), nullable=False),
         sa.Column("params_id", sa.Integer(), nullable=False),

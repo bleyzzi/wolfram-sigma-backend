@@ -25,8 +25,7 @@ class SQLAlchemyRepository:
     async def find_all(self):
         stmt = select(self.model)
         res = await self.session.execute(stmt)
-        res = [row[0].to_read_model() for row in res.all()]
-        return res
+        return [row for row in res.scalars()]
 
     async def find_one(self, **filter_by):
         stmt = select(self.model).filter_by(**filter_by)

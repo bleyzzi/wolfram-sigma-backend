@@ -1,5 +1,3 @@
-import ctypes
-
 import sympy as sp
 
 from wolfram_sigma_backend.app.infrastructure.math.load_lib import LoadCLib
@@ -29,11 +27,13 @@ class IntegralProcessorFromCLib:
             raise SyntaxError("Invalid equation")
 
     # def calculate_definite_integral(self, equation: str):
-    #     func, symbol_list = self.__convert_string_to_func(equation)
+    #     func = self.__convert_string_to_func(equation)
     #     c_f = ctypes.CFUNCTYPE(ctypes.c_double, ctypes.c_double)(func)
     #     result = ctypes.c_double()
     #
-    #     code = self.lib.indefiniteIntegral(c_f, a, b, num_points, ctypes.byref(result)))
+    #     code = self.lib.indefiniteIntegral(c_f)
     #
+    #     code = self.lib.indefiniteIntegral(c_f, a, b, num_points, ctypes.byref(result)))
+
     # def calculate_indefinite_integral(self):
     #     ...

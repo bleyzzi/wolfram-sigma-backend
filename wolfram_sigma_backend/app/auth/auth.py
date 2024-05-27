@@ -11,7 +11,6 @@ from config import SECRET as SECRET_AUTH
 from wolfram_sigma_backend.app.auth.manager import get_user_manager
 from wolfram_sigma_backend.app.models.auth_models import User
 
-
 cookie_transport = CookieTransport(cookie_max_age=3600)
 
 

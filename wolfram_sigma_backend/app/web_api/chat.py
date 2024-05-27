@@ -1,10 +1,6 @@
-import uuid
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
-
-from wolfram_sigma_backend.app.auth.auth import current_user
-from wolfram_sigma_backend.app.infrastructure.chat.connection_manager import ConnectionManager, manager
-from wolfram_sigma_backend.app.models.auth_models import User
+from wolfram_sigma_backend.app.infrastructure.chat.connection_manager import manager
 
 chat_router = APIRouter(tags=["chat"])
 

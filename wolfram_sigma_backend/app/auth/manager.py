@@ -1,13 +1,16 @@
 import uuid
 from typing import Optional
 
-from fastapi import Depends, Request
+from fastapi import BackgroundTasks, Depends, Request
 from fastapi_users import BaseUserManager, UUIDIDMixin, exceptions, models, schemas
 from fastapi_users.jwt import generate_jwt
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config import SECRET as SECRET_AUTH
+from wolfram_sigma_backend.app.infrastructure.send_verification_email import (
+    send_verification_email,
+)
 from wolfram_sigma_backend.app.models.auth_models import User
 from wolfram_sigma_backend.app.persistence.database_config import get_async_session
 
@@ -22,7 +25,9 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     async def on_after_register(self, user: User, request: Request | None = None):
         print(f"User {user.id} has registered.")
         verification_token = str(uuid.uuid4())
-
+        background_tasks = BackgroundTasks()
+        background_tasks.add_task(send_verification_email, user.email, verification_token)
+        await background_tasks()
 
     async def forgot_password(self, user: models.UP, request: Optional[Request] = None) -> str:
         if not user.is_active:

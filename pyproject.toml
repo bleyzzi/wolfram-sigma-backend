@@ -19,6 +19,8 @@ alembic = "^1.13.1"
 black = "^24.2.0"
 flake8 = "^7.0.0"
 pre-commit = "^3.7.0"
+numpy = "^1.26.4"
+sympy = "^1.12"
 
 
 [build-system]

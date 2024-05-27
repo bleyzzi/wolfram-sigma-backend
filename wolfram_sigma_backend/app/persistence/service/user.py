@@ -9,6 +9,7 @@ class UserService:
         user_dict = user.model_dump()
         session = get_async_session()
         res = await UserRepository(await anext(session)).edit_one(user_id, user_dict)
+        print(res)
         return UserSchema.model_validate(res)
 
     @staticmethod

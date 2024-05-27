@@ -30,13 +30,19 @@ for router in routers:
     app.include_router(router)
 
 
-origins = ["http://localhost:8000"]
+origins = [
+    "http://localhost:8000",
+    "http://localhost",
+    "http://127.0.0.1",
+    "http://127.0.0.1:4200",
+    "http://localhost:4200",
+]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
     allow_headers=[
         "Access-Control-Allow-Headers",
         "Content-Type",

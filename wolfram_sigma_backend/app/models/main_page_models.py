@@ -18,10 +18,10 @@ class Params(Base):
 class Equation(Base):
     __tablename__ = "equation"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     expression: Mapped[str] = mapped_column(String, nullable=False)
     result: Mapped[str] = mapped_column(String, nullable=False)
-    params_id: Mapped[int] = mapped_column(Integer, ForeignKey("params.id"))
+    params_id: Mapped[int] = mapped_column(Integer)
     created_at: Mapped[datetime | None] = mapped_column(default=datetime.utcnow)
 
 

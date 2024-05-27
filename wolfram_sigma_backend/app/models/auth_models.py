@@ -28,3 +28,11 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
+
+class UserVerify(Base):
+    __tablename__ = "user_verify"
+
+    user_id: Mapped[uuid.UUID] = mapped_column(types.Uuid, ForeignKey("user.id"), primary_key=True)
+    token: Mapped[str] = mapped_column(String, default="0000")
+    is_token_active: Mapped[bool] = mapped_column(Boolean, default=False)

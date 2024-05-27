@@ -12,6 +12,9 @@ DB_NAME = os.environ.get("DB_NAME")
 DB_USER = os.environ.get("DB_USER")
 DB_PASS = os.environ.get("DB_PASS")
 
+
+mail_address = os.environ.get("mail_address")
+mail_password = os.environ.get("mail_password")
 """
 ADD TEST ENV
 """

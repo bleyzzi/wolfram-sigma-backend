@@ -2,11 +2,13 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+from config import mail_address, mail_password
+
 
 def send_verification_email(email: str, verification_token: str):
-    sender_email = "your-email@example.com"
+    sender_email = mail_address
+    password = mail_password
     receiver_email = email
-    password = "your-email-password"
 
     # Создаем сообщение
     message = MIMEMultipart("alternative")
@@ -15,7 +17,7 @@ def send_verification_email(email: str, verification_token: str):
     message["To"] = receiver_email
 
     # Создаем URL для верификации
-    verification_url = f"http://yourdomain.com/verify?token={verification_token}"
+    verification_url = f"http://127.0.0.1:4200/verify?token={verification_token}"
 
     # Текст сообщения
     text = f"Please verify your email by clicking on the following link: {verification_url}"
@@ -24,7 +26,7 @@ def send_verification_email(email: str, verification_token: str):
 
     # Отправка сообщения через SMTP сервер
     try:
-        with smtplib.SMTP_SSL("smtp.example.com", 465) as server:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message.as_string())
             print("Email sent successfully")

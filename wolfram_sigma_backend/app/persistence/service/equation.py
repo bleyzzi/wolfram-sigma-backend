@@ -14,4 +14,4 @@ class EquationService:
     async def get_equations():
         session = get_async_session()
         res = await EquationRepository(await anext(session)).find_all()
-        return [EquationGetSchema.model_validate(row) for row in res]
+        return [EquationGetSchema.model_validate(row) for row in res[::-1]]

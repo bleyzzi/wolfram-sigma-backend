@@ -21,6 +21,8 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
 
     async def on_after_register(self, user: User, request: Request | None = None):
         print(f"User {user.id} has registered.")
+        verification_token = str(uuid.uuid4())
+
 
     async def forgot_password(self, user: models.UP, request: Optional[Request] = None) -> str:
         if not user.is_active:
